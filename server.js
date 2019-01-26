@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const passport = require('passport');
 
 const users = require('./routers/api/users');
 const profile = require('./routers/api/profile');
@@ -7,7 +9,11 @@ const posts = require('./routers/api/posts');
 
 const app = express();
 
-//db config
+// Body Parer
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+// db config
 const db = require('./config/keys').mongoURI;
 
 //connect to mongoDB
@@ -17,7 +23,9 @@ mongoose
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
 
-app.get('/', (req, res) => res.send('Hello!'));
+// Passport
+app.use(passport.initialize());
+require('./config/passport')(passport);
 
 //use routers
 app.use('/api/users', users);
