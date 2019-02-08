@@ -18,12 +18,12 @@ module.exports = function validateRegisterInput(data){
         errors.name = 'Name field is required';
     }
 
-    if(Validator.isEmpty(data.email)){
-        errors.email = 'Emial field is required';
-    }
-
     if(!Validator.isEmail(data.email)){
         errors.email = 'Emial is invalid';
+    }
+
+    if(Validator.isEmpty(data.email)){
+        errors.email = 'Emial field is required';
     }
 
     if(!Validator.isLength(data.password, {min: 6, max:30})){
