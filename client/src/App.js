@@ -19,6 +19,8 @@ import CreateProfile from './components/create-profile/CreateProfile';
 import './App.css';
 import { decode } from 'punycode';
 import { clearCurrentProfile } from './actions/profileActions';
+import EditProfile from './components/edit-profile/EditProfile';
+import AddEXperience from './components/add-credentials/AddExperience';
 
 //check token
 if(localStorage.jwtToken){
@@ -54,6 +56,12 @@ class App extends Component {
               </Switch>
               <Switch>
                 <PrivateRoute exact path = "/create-profile" component = {CreateProfile}/>
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path = "/edit-profile" component = {EditProfile}/>
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path = "/add-experience" component = {AddEXperience}/>
               </Switch>
             </div>
             <Footer />
