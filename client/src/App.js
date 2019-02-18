@@ -21,6 +21,7 @@ import { decode } from 'punycode';
 import { clearCurrentProfile } from './actions/profileActions';
 import EditProfile from './components/edit-profile/EditProfile';
 import AddEXperience from './components/add-credentials/AddExperience';
+import AddEducation from './components/add-credentials/AddEducation';
 
 //check token
 if(localStorage.jwtToken){
@@ -62,6 +63,9 @@ class App extends Component {
               </Switch>
               <Switch>
                 <PrivateRoute exact path = "/add-experience" component = {AddEXperience}/>
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path = "/add-education" component = {AddEducation}/>
               </Switch>
             </div>
             <Footer />
