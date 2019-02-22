@@ -41,7 +41,7 @@ router.get('/:id', (req, res) => {
 // @route   Delete api/posts/:id
 // @desc    Delete post
 // @access  Private
-router.delete('/', passport.authenticate('jwt', {session:false}), (req, res) => {
+router.delete('/:id', passport.authenticate('jwt', {session:false}), (req, res) => {
     Profile.findOne({user: req.user.id})
         .then(profile => {
             Post.findById(req.params.id)
@@ -92,7 +92,7 @@ router.post('/like/:id', passport.authenticate('jwt', {session:false}), (req, re
         .then(profile => {
             Post.findById(req.params.id)
                 .then(post => {
-                    if(post.like.filter(like => like.user.toString() === req.user.id).length > 0){
+                    if(post.likes.filter(like => like.user.toString() === req.user.id).length > 0){
                         return res.status(400).json({alreadyliked: 'User already liked this post'});
                     }
 
@@ -112,7 +112,7 @@ router.post('/unlike/:id', passport.authenticate('jwt', {session:false}), (req, 
         .then(profile => {
             Post.findById(req.params.id)
                 .then(post => {
-                    if(post.like.filter(like => like.user.toString() === req.user.id).length === 0){
+                    if(post.likes.filter(like => like.user.toString() === req.user.id).length === 0){
                         return res.status(400).json({notliked: 'You have not liked this post'});
                     }
 
